@@ -6,6 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Nowy folder\**" />
+    <Compile Remove="Views\App\**" />
+    <Content Remove="Nowy folder\**" />
+    <Content Remove="Views\App\**" />
+    <EmbeddedResource Remove="Nowy folder\**" />
+    <EmbeddedResource Remove="Views\App\**" />
+    <None Remove="Nowy folder\**" />
+    <None Remove="Views\App\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\Class.cs" />
+    <Compile Remove="Models\CodeFile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
