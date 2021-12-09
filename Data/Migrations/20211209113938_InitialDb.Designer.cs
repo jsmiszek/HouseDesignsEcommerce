@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseDesignsEcommerce.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208114629_InitialDb")]
+    [Migration("20211209113938_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,122 @@ namespace HouseDesignsEcommerce.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.HouseDesign", b =>
+                {
+                    b.Property<int>("HouseDesignId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("MinPlotDimensionLength")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinPlotDimensionWidth")
+                        .HasColumnType("float");
+
+                    b.Property<int>("NumberOfBathrooms")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfGaragePositions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfRooms")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("RoofAngle")
+                        .HasColumnType("float");
+
+                    b.Property<double>("UseableArea")
+                        .HasColumnType("float");
+
+                    b.HasKey("HouseDesignId");
+
+                    b.ToTable("HouseDesigns");
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.HouseDesignCategory", b =>
+                {
+                    b.Property<int>("HouseDesignCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HouseDesignId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HouseDesignCategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("HouseDesignId");
+
+                    b.ToTable("HouseDesignCategory");
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("HouseDesignId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ImageCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("HouseDesignId");
+
+                    b.HasIndex("ImageCategoryId");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.ImageCategory", b =>
+                {
+                    b.Property<int>("ImageCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageCategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ImageCategoryId");
+
+                    b.ToTable("ImageCategories");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -219,6 +335,36 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.HouseDesignCategory", b =>
+                {
+                    b.HasOne("HouseDesignsEcommerce.Data.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HouseDesignsEcommerce.Data.Entities.HouseDesign", "HouseDesign")
+                        .WithMany()
+                        .HasForeignKey("HouseDesignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.Image", b =>
+                {
+                    b.HasOne("HouseDesignsEcommerce.Data.Entities.HouseDesign", "HouseDesign")
+                        .WithMany()
+                        .HasForeignKey("HouseDesignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HouseDesignsEcommerce.Data.Entities.ImageCategory", "ImageCategory")
+                        .WithMany()
+                        .HasForeignKey("ImageCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

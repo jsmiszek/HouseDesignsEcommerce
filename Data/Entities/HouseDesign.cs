@@ -7,7 +7,7 @@ namespace HouseDesignsEcommerce.Data.Entities
 {
     public class HouseDesign
     {
-        public int Id { get; set; }
+        public int HouseDesignId { get; set; }
         public string ProjectName { get; set; }
         public double UseableArea { get; set; }
         public double MinPlotDimensionWidth { get; set; }

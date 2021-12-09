@@ -7,7 +7,7 @@ namespace HouseDesignsEcommerce.Data.Entities
 {
     public class ImageCategory
     {
-        public int Id { get; set; }
-        public string CategoryName { get; set; }
+        public int ImageCategoryId { get; set; }
+        public string ImageCategoryName { get; set; }
 }
 }

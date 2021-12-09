@@ -12,7 +12,8 @@
       "commandName": "IISExpress",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
-      }
+      },
+      "sqlDebugging": true
     },
     "HouseDesignsEcommerce": {
       "commandName": "Project",

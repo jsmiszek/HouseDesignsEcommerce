@@ -1,16 +1,73 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using HouseDesignsEcommerce.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HouseDesignsEcommerce.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+       //public ApplicationDbContext _context;
+
+        public DbSet<HouseDesign> HouseDesigns { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageCategory> ImageCategories { get; set; }
+        public DbSet<HouseDesignCategory> HouseDesignCategory { get; set; }
+
+        /*public ApplicationDbContext(ApplicationDbContext context)
+        {
+            _context = context;
+        }*/
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Seed();
+        }
+
+      /*  protected override void OnModelCreating(ModelBuilder builder)
+        {
+          /*  base.OnModelCreating(builder);
+
+
+            _context.Database.EnsureCreated();
+            if (!_context.HouseDesigns.Any())
+            {*/
+        // builder.Seed();
+        /* builder.Entity<Category>().HasData(new Category() { CategoryId = 1, CategoryName = "Domy parterowe" });
+         builder.Entity<HouseDesign>().HasData(new HouseDesign()
+         {
+             HouseDesignId = 1,
+             ProjectName = "Dom w przebiśniegach",
+             UseableArea = 196.02,
+             MinPlotDimensionWidth = 24.3,
+             MinPlotDimensionLength = 28.7,
+             RoofAngle = 30,
+             Price = 2499,
+             NumberOfRooms = 5,
+             NumberOfBathrooms = 2,
+             NumberOfGaragePositions = 2
+         });
+
+         builder.Entity<HouseDesignCategory>().HasData(new HouseDesignCategory() { HouseDesignCategoryId = 1, HouseDesignId = 1, CategoryId = 1 });
+         builder.Entity<HouseDesignCategory>().HasData(new ImageCategory() { ImageCategoryId = 1, ImageCategoryName = "Widok zewnątrz" });
+         builder.Entity<HouseDesignCategory>().HasData(new Image()
+         {
+             ImagePath = "HouseDesignEcommerce/Images/1.jpg",
+             ImageCategoryId = 1,
+             HouseDesignId = 1
+         });
+         }
+ }*/
     }
 }
