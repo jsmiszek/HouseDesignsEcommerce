@@ -23,6 +23,13 @@ namespace HouseDesignsEcommerce.Data
             _context = context;
         }*/
 
+        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=aspnet-HouseDesignsEcommerce-A58DB898-3B4C-4946-8F0E-43340591B593;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

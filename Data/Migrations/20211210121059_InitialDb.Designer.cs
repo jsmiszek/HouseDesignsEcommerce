@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseDesignsEcommerce.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211209113938_InitialDb")]
+    [Migration("20211210121059_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,13 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Domy parterowe"
+                        });
                 });
 
             modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.HouseDesign", b =>
@@ -73,6 +80,21 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasKey("HouseDesignId");
 
                     b.ToTable("HouseDesigns");
+
+                    b.HasData(
+                        new
+                        {
+                            HouseDesignId = 1,
+                            MinPlotDimensionLength = 28.699999999999999,
+                            MinPlotDimensionWidth = 24.300000000000001,
+                            NumberOfBathrooms = 2,
+                            NumberOfGaragePositions = 2,
+                            NumberOfRooms = 5,
+                            Price = 2499.0,
+                            ProjectName = "Dom w przebisniegach",
+                            RoofAngle = 30.0,
+                            UseableArea = 196.02000000000001
+                        });
                 });
 
             modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.HouseDesignCategory", b =>
@@ -95,6 +117,14 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasIndex("HouseDesignId");
 
                     b.ToTable("HouseDesignCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            HouseDesignCategoryId = 1,
+                            CategoryId = 1,
+                            HouseDesignId = 1
+                        });
                 });
 
             modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.Image", b =>
@@ -120,6 +150,15 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasIndex("ImageCategoryId");
 
                     b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            ImageId = 1,
+                            HouseDesignId = 1,
+                            ImageCategoryId = 1,
+                            ImagePath = "HouseDesignEcommerce/Images/1.jpg"
+                        });
                 });
 
             modelBuilder.Entity("HouseDesignsEcommerce.Data.Entities.ImageCategory", b =>
@@ -135,6 +174,13 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     b.HasKey("ImageCategoryId");
 
                     b.ToTable("ImageCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ImageCategoryId = 1,
+                            ImageCategoryName = "Widok zewnatrz"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
