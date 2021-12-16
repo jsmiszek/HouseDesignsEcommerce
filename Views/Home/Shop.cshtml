@@ -1,0 +1,25 @@
+﻿@model IEnumerable<HouseDesign>
+@*@model1 IEnumerable<Image>*@
+
+<h1>Shop</h1>
+<p>Count: @Model.Count()</p>
+
+<div class="row">
+    @foreach (var h in Model)
+    {
+        <div class="col-md-3">
+            <div class="border bg-light rounded p-1" >
+                <h3>@h.ProjectName</h3>
+                <ul>
+                    <li>Powierzchnia uzytkowa: @h.UseableArea</li>
+                    <li>Minimalne wymiary działki: @h.MinPlotDimensionLength x @h.MinPlotDimensionWidth</li>
+                    <li>Kat dachu: @h.RoofAngle</li>
+                    <li>Cena: @h.Price zł</li>
+                </ul>
+                <button id="buyButton" class="btn btn-success">Kup</button>
+            </div>
+
+        </div>
+    }
+</div>
+

@@ -1,5 +1,3 @@
-using System;
-
 namespace HouseDesignsEcommerce.Models
 {
     public class ErrorViewModel

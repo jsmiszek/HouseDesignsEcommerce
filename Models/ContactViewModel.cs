@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HouseDesignsEcommerce.Models
 {
@@ -17,8 +13,8 @@ namespace HouseDesignsEcommerce.Models
         [Required]
         public string Subject { get; set; }
         [Required]
-        [MaxLength(250, ErrorMessage ="Too Long")]
+        [MaxLength(250, ErrorMessage = "Too Long")]
         public string Message { get; set; }
 
-}
+    }
 }

@@ -1,19 +1,12 @@
 using HouseDesignsEcommerce.Data;
+using HouseDesignsEcommerce.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HouseDesignsEcommerce.Services;
-
 
 namespace HouseDesignsEcommerce
 {
@@ -34,8 +27,11 @@ namespace HouseDesignsEcommerce
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
+            //services.AddTransient<ApplicationDbContext>();
             services.AddTransient<IMailService, NullMailService>();
+
+            //services.AddScoped<IApplicationRepository, ApplicationRepository>();
             // Support for real mail service
             services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
             services.AddRazorPages();
@@ -43,7 +39,7 @@ namespace HouseDesignsEcommerce
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, ILoggerFactory loggerFactory*/)
         {
             if (env.IsDevelopment())
             {
@@ -64,7 +60,7 @@ namespace HouseDesignsEcommerce
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints => //
             {
                 endpoints.MapControllerRoute(
@@ -72,6 +68,13 @@ namespace HouseDesignsEcommerce
                      pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            /*    loggerFactory.WithFilter(new FilterLoggerSettings
+                {
+                    { "Default", LogLevel.Information },
+                    { "Microsoft", LogLevel.Warning },
+                    { "System", LogLevel.Warning }
+                });*/
         }
     }
 }

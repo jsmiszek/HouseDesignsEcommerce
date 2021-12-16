@@ -1,13 +1,5 @@
-using HouseDesignsEcommerce.Data;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HouseDesignsEcommerce
 {
@@ -22,7 +14,7 @@ namespace HouseDesignsEcommerce
                 var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
                 using (var scope = scopeFactory.CreateScope())
                 {
-                    var seeder = scope.ServiceProvider.GetService<ApplicatioanDbSeeder>();
+                    var seeder = scope.ServiceProvider.GetService<ApplicationDbSeeder>();
                     seeder.Seed();
                 }
             }*/
@@ -31,6 +23,12 @@ namespace HouseDesignsEcommerce
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                /* .ConfigureLogging(logBuilder =>
+                 {
+                     logBuilder.ClearProviders(); // removes all providers from LoggerFactory
+                     logBuilder.AddConsole();
+                     logBuilder.AddTraceSource("Information, ActivityTracing"); // Add Trace listener provider
+                 })*/
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

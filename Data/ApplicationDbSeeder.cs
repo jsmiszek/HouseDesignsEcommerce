@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HouseDesignsEcommerce.Data
 {
-    public static class ApplicatioanDbSeeder
+    public static class ApplicationDbSeeder
     {
 
         public static void Seed(this ModelBuilder builder)
