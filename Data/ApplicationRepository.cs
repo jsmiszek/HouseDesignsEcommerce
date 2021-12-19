@@ -22,8 +22,8 @@ namespace HouseDesignsEcommerce.Data
             _logger.LogInformation("Get AllHouseDesigns was called");
 
             return _context.HouseDesigns
-                .OrderBy(h => h.ProjectName)
-                .ToList();
+                    .OrderBy(h => h.ProjectName)
+                    .ToList();
 
             /*try
             {
@@ -54,7 +54,24 @@ namespace HouseDesignsEcommerce.Data
 
         public IEnumerable<Category> GetAllCategories()
         {
-            return _context.Categories.ToList();
+            try
+            {
+                _logger.LogInformation("GetAllCategories was called");
+                return _context.Categories.ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get all house designs: {ex}");
+                return null;
+            }
+
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            return _context.Categories
+                    .Where(c => c.CategoryId == id)
+                    .FirstOrDefault();
         }
     }
 }

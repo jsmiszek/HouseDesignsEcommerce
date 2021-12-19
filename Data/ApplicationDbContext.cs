@@ -1,16 +1,12 @@
 ﻿using HouseDesignsEcommerce.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HouseDesignsEcommerce.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-       //public ApplicationDbContext _context;
+        //public ApplicationDbContext _context;
 
         public DbSet<HouseDesign> HouseDesigns { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -23,12 +19,12 @@ namespace HouseDesignsEcommerce.Data
             _context = context;
         }*/
 
-       /* private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=aspnet-HouseDesignsEcommerce-A58DB898-3B4C-4946-8F0E-43340591B593;Trusted_Connection=True;MultipleActiveResultSets=true";
+        /* private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=aspnet-HouseDesignsEcommerce-A58DB898-3B4C-4946-8F0E-43340591B593;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(connectionString);
-        }*/
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+             optionsBuilder.UseSqlServer(connectionString);
+         }*/
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -42,14 +38,14 @@ namespace HouseDesignsEcommerce.Data
             builder.Seed();
         }
 
-      /*  protected override void OnModelCreating(ModelBuilder builder)
-        {
-          /*  base.OnModelCreating(builder);
+        /*  protected override void OnModelCreating(ModelBuilder builder)
+          {
+            /*  base.OnModelCreating(builder);
 
 
-            _context.Database.EnsureCreated();
-            if (!_context.HouseDesigns.Any())
-            {*/
+              _context.Database.EnsureCreated();
+              if (!_context.HouseDesigns.Any())
+              {*/
         // builder.Seed();
         /* builder.Entity<Category>().HasData(new Category() { CategoryId = 1, CategoryName = "Domy parterowe" });
          builder.Entity<HouseDesign>().HasData(new HouseDesign()

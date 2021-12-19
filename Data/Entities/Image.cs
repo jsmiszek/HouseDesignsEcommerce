@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HouseDesignsEcommerce.Data.Entities
+﻿namespace HouseDesignsEcommerce.Data.Entities
 {
     public class Image
     {
@@ -15,5 +9,5 @@ namespace HouseDesignsEcommerce.Data.Entities
         public int ImageCategoryId { get; set; }
         public int HouseDesignId { get; set; }
 
-}
+    }
 }

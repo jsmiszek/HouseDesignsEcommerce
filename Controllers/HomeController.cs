@@ -1,12 +1,7 @@
 ﻿using HouseDesignsEcommerce.Models;
 using HouseDesignsEcommerce.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HouseDesignsEcommerce.Controllers
 {
@@ -16,10 +11,10 @@ namespace HouseDesignsEcommerce.Controllers
 
         private readonly IMailService _mailService;
 
-       /* public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }*/
+        /* public HomeController(ILogger<HomeController> logger)
+         {
+             _logger = logger;
+         }*/
         public HomeController(IMailService mailService)
         {
             _mailService = mailService;
@@ -44,7 +39,7 @@ namespace HouseDesignsEcommerce.Controllers
         [HttpPost("contact")]
         public IActionResult Contact(ContactViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //Send the email
                 _mailService.SendMessage("justynasmiszek1@gmail.com", model.Subject,
@@ -60,7 +55,7 @@ namespace HouseDesignsEcommerce.Controllers
         }
 
         [HttpGet("about")]
-        public IActionResult About() 
+        public IActionResult About()
         {
             return View();
         }

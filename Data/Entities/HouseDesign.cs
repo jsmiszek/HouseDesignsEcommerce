@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HouseDesignsEcommerce.Data.Entities
+﻿namespace HouseDesignsEcommerce.Data.Entities
 {
     public class HouseDesign
     {
@@ -17,7 +12,7 @@ namespace HouseDesignsEcommerce.Data.Entities
         public int NumberOfRooms { get; set; }
         public int NumberOfBathrooms { get; set; }
         public int NumberOfGaragePositions { get; set; }
-       // public ICollection<Category> Category { get; set; }
+        // public ICollection<Category> Category { get; set; }
 
-}
+    }
 }

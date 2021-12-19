@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+//using AutoMapper;
 
 namespace HouseDesignsEcommerce
 {
@@ -28,12 +30,14 @@ namespace HouseDesignsEcommerce
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddTransient<ApplicationDbContext>();
+            services.AddTransient<ApplicationDbContext>();
             services.AddTransient<IMailService, NullMailService>();
 
-            //services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
             // Support for real mail service
-            services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
             //services.AddMvc();
         }
@@ -61,13 +65,23 @@ namespace HouseDesignsEcommerce
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => //
+
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                     name: "default",
-                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "Fallback",
+                     "{controller}/{action}/{id?}",
+                     new { controller = "Home", action = "Index" });
                 endpoints.MapRazorPages();
             });
+
+            /*   app.UseEndpoints(endpoints => //
+               {
+                   endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                   endpoints.MapRazorPages();
+               });*/
 
             /*    loggerFactory.WithFilter(new FilterLoggerSettings
                 {

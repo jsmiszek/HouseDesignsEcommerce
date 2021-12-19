@@ -8,7 +8,8 @@ namespace HouseDesignsEcommerce.Data
 
         IEnumerable<HouseDesign> GetAllHouseDesigns();
         IEnumerable<HouseDesign> GetHouseDesignsByProjectName(string projectName);
-        bool SaveAll();
         IEnumerable<Category> GetAllCategories();
+        Category GetCategoryById(int id);
+        bool SaveAll();
     }
 }
