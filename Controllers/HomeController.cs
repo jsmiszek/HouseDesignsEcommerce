@@ -1,23 +1,22 @@
-﻿using HouseDesignsEcommerce.Models;
+﻿using HouseDesignsEcommerce.Data;
+using HouseDesignsEcommerce.Models;
 using HouseDesignsEcommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 
 namespace HouseDesignsEcommerce.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
 
         private readonly IMailService _mailService;
+        private readonly ApplicationDbContext _context;
 
-        /* public HomeController(ILogger<HomeController> logger)
-         {
-             _logger = logger;
-         }*/
-        public HomeController(IMailService mailService)
+        public HomeController(IMailService mailService, ApplicationDbContext context)
         {
             _mailService = mailService;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -65,6 +64,15 @@ namespace HouseDesignsEcommerce.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Shop()
+        {
+            var results = _context.HouseDesigns
+                .OrderBy(h => h.ProjectName)
+                .ToList();
+
+            return View(results);
         }
     }
 }

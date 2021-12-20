@@ -73,5 +73,17 @@ namespace HouseDesignsEcommerce.Data
                     .Where(c => c.CategoryId == id)
                     .FirstOrDefault();
         }
+
+        public void AddEntity(object model)
+        {
+            _context.Add(model);
+        }
+
+        public HouseDesign GetHouseDesignById(int id)
+        {
+            return _context.HouseDesigns
+                    .Where(h => h.HouseDesignId == id)
+                    .FirstOrDefault();
+        }
     }
 }

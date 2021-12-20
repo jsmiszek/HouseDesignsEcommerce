@@ -10,6 +10,9 @@ namespace HouseDesignsEcommerce.Data
         IEnumerable<HouseDesign> GetHouseDesignsByProjectName(string projectName);
         IEnumerable<Category> GetAllCategories();
         Category GetCategoryById(int id);
+        HouseDesign GetHouseDesignById(int id);
         bool SaveAll();
+        void AddEntity(object model);
+        
     }
 }

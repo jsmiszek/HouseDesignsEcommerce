@@ -1,3 +1,4 @@
+using AutoMapper;
 using HouseDesignsEcommerce.Data;
 using HouseDesignsEcommerce.Services;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-//using AutoMapper;
+using System.Reflection;
 
 namespace HouseDesignsEcommerce
 {
@@ -29,6 +30,8 @@ namespace HouseDesignsEcommerce
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<ApplicationDbContext>();
             services.AddTransient<IMailService, NullMailService>();
