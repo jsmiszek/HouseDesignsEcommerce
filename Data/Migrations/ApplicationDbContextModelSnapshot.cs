@@ -48,6 +48,9 @@ namespace HouseDesignsEcommerce.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("MinPlotDimensionLength")
                         .HasColumnType("float");
 
@@ -83,6 +86,7 @@ namespace HouseDesignsEcommerce.Data.Migrations
                         new
                         {
                             HouseDesignId = 1,
+                            ImagePath = "HouseDesignEcommerce/Images/1.jpg",
                             MinPlotDimensionLength = 28.699999999999999,
                             MinPlotDimensionWidth = 24.300000000000001,
                             NumberOfBathrooms = 2,

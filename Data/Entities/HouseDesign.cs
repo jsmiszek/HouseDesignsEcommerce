@@ -12,6 +12,7 @@
         public int NumberOfRooms { get; set; }
         public int NumberOfBathrooms { get; set; }
         public int NumberOfGaragePositions { get; set; }
+        public string ImagePath { get; set; }
         // public ICollection<Category> Category { get; set; }
 
     }

@@ -11,12 +11,12 @@ namespace HouseDesignsEcommerce.Controllers
     {
 
         private readonly IMailService _mailService;
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationRepository _repository;
 
-        public HomeController(IMailService mailService, ApplicationDbContext context)
+        public HomeController(IMailService mailService, IApplicationRepository repository)
         {
             _mailService = mailService;
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -68,9 +68,7 @@ namespace HouseDesignsEcommerce.Controllers
 
         public IActionResult Shop()
         {
-            var results = _context.HouseDesigns
-                .OrderBy(h => h.ProjectName)
-                .ToList();
+            var results = _repository.GetAllHouseDesigns();
 
             return View(results);
         }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseDesignsEcommerce.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211216151736_InitialDb")]
-    partial class InitialDb
+    [Migration("20220216154547_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,9 @@ namespace HouseDesignsEcommerce.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("MinPlotDimensionLength")
                         .HasColumnType("float");
 
@@ -85,6 +88,7 @@ namespace HouseDesignsEcommerce.Data.Migrations
                         new
                         {
                             HouseDesignId = 1,
+                            ImagePath = "HouseDesignEcommerce/Images/1.jpg",
                             MinPlotDimensionLength = 28.699999999999999,
                             MinPlotDimensionWidth = 24.300000000000001,
                             NumberOfBathrooms = 2,

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HouseDesignsEcommerce.Data.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,7 +73,8 @@ namespace HouseDesignsEcommerce.Data.Migrations
                     Price = table.Column<double>(nullable: false),
                     NumberOfRooms = table.Column<int>(nullable: false),
                     NumberOfBathrooms = table.Column<int>(nullable: false),
-                    NumberOfGaragePositions = table.Column<int>(nullable: false)
+                    NumberOfGaragePositions = table.Column<int>(nullable: false),
+                    ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -259,8 +260,8 @@ namespace HouseDesignsEcommerce.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "HouseDesigns",
-                columns: new[] { "HouseDesignId", "MinPlotDimensionLength", "MinPlotDimensionWidth", "NumberOfBathrooms", "NumberOfGaragePositions", "NumberOfRooms", "Price", "ProjectName", "RoofAngle", "UseableArea" },
-                values: new object[] { 1, 28.699999999999999, 24.300000000000001, 2, 2, 5, 2499.0, "Dom w przebisniegach", 30.0, 196.02000000000001 });
+                columns: new[] { "HouseDesignId", "ImagePath", "MinPlotDimensionLength", "MinPlotDimensionWidth", "NumberOfBathrooms", "NumberOfGaragePositions", "NumberOfRooms", "Price", "ProjectName", "RoofAngle", "UseableArea" },
+                values: new object[] { 1, "HouseDesignEcommerce/Images/1.jpg", 28.699999999999999, 24.300000000000001, 2, 2, 5, 2499.0, "Dom w przebisniegach", 30.0, 196.02000000000001 });
 
             migrationBuilder.InsertData(
                 table: "ImageCategories",

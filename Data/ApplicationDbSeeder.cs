@@ -20,7 +20,8 @@ namespace HouseDesignsEcommerce.Data
                 Price = 2499,
                 NumberOfRooms = 5,
                 NumberOfBathrooms = 2,
-                NumberOfGaragePositions = 2
+                NumberOfGaragePositions = 2,
+                ImagePath = "HouseDesignEcommerce/Images/1.jpg"
             });
 
             builder.Entity<HouseDesignCategory>().HasData(new HouseDesignCategory() { HouseDesignCategoryId = 1, HouseDesignId = 1, CategoryId = 1 });
