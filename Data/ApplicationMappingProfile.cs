@@ -16,7 +16,9 @@ namespace HouseDesignsEcommerce.Data
                 .ForMember(h => h.HouseDesignId, ex => ex.MapFrom(h => h.HouseDesignId))
                 .ReverseMap();
 
-
+            CreateMap<Category,CategoryViewModel>()
+                .ForMember(c => c.CategoryId, ex => ex.MapFrom(c => c.CategoryId))
+                .ReverseMap();
         }
     }
 }

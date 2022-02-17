@@ -1,8 +1,11 @@
-﻿using HouseDesignsEcommerce.Data;
+﻿using AutoMapper;
+using HouseDesignsEcommerce.Data;
+using HouseDesignsEcommerce.Data.Entities;
 using HouseDesignsEcommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 
 namespace HouseDesignsEcommerce.Controllers
 {
@@ -12,21 +15,25 @@ namespace HouseDesignsEcommerce.Controllers
     {
         private readonly IApplicationRepository _repository;
         private readonly ILogger<CategoriesController> _logger;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(IApplicationRepository repository, ILogger<CategoriesController> logger)
+        public CategoriesController(IApplicationRepository repository, ILogger<CategoriesController> logger,
+            IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
 
 
         [HttpGet]
-        //[ProducesResponseType(200)]
-        public IActionResult/*<IEnumerable<Category>>*/ Get()
+        [ProducesResponseType(200)]
+        public ActionResult Get()
         {
             try
             {
-                return Ok(_repository.GetAllCategories());
+                var result = _repository.GetAllCategories();
+                return Ok(_mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(result));
             }
             catch (Exception ex)
             {
@@ -42,8 +49,8 @@ namespace HouseDesignsEcommerce.Controllers
             {
                 var category = _repository.GetCategoryById(id);
 
-                if (category != null) 
-                    return Ok(category);
+                if (category != null)
+                    return Ok(_mapper.Map<Category, CategoryViewModel>(category));
                 else 
                     return NotFound();
             }
@@ -54,28 +61,42 @@ namespace HouseDesignsEcommerce.Controllers
             }
         }
 
-       /* [HttpPost]
-        public IActionResult Post([FromBody]CategoryViewModel model)
+        [HttpGet("{name:string}")]
+        public IActionResult Get(string name)
+        {
+            try
+            {
+                var category = _repository.GetCategoryByName(name);
+
+                if (category != null)
+                    return Ok(_mapper.Map<Category, CategoryViewModel>(category));
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get category by name: {ex}");
+                return BadRequest("Failed to get category by name");
+            }
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Post([FromBody] CategoryViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var newHouseDesign = new HouseDesign()
-                    {
-                        
-                    };
+                    var newCategory = _mapper.Map<CategoryViewModel, Category>(model);
 
-                    _repository.AddEntity(newHouseDesign);
+                    _repository.AddEntity(newCategory);
 
                     if (_repository.SaveAll())
                     {
-                        var vm = new HouseDesignViewModel()
-                        {
-                            
-                        };
 
-                        return Created($"/api/categories/{vm.HouseDesignId}", vm);
+                        return Created($"/api/categories/{newCategory.CategoryId}", _mapper.Map<Category, CategoryViewModel>(newCategory));
                     }
                 }
                 else
@@ -85,10 +106,10 @@ namespace HouseDesignsEcommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to post category: {ex}");
-                return BadRequest("Failed to post category");
+                _logger.LogError($"Failed to save new category: {ex}");
             }
-        }*/
+            return BadRequest("Failed to save new category");
+        }
 
     }
 }

@@ -24,20 +24,13 @@ namespace HouseDesignsEcommerce.Data
             return _context.HouseDesigns
                     .OrderBy(h => h.HouseDesignId)
                     .ToList();
+        }
 
-            /*try
-            {
-                _logger.LogInformation("Get AllHouseDesigns was called");
-
-                return _context.HouseDesigns
-                    .OrderBy(h => h.ProjectName)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to get all house designs: {ex}");
-                return null;
-            }*/
+        public HouseDesign GetHouseDesignById(int id)
+        {
+            return _context.HouseDesigns
+                    .Where(h => h.HouseDesignId == id)
+                    .FirstOrDefault();
         }
 
         public IEnumerable<HouseDesign> GetHouseDesignsByProjectName(string projectName)
@@ -47,10 +40,57 @@ namespace HouseDesignsEcommerce.Data
                 .ToList();
         }
 
-        public bool SaveAll()
+       
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByUseableArea(double min, double max)
         {
-            return _context.SaveChanges() > 0;
+            return _context.HouseDesigns
+                .Where(h => h.UseableArea >= min && h.UseableArea <= max)
+                .ToList();
         }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByPlotDimensions(double width, double length)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.MinPlotDimensionWidth <= width && h.MinPlotDimensionLength <= length)
+                .ToList();
+        }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByRoofAngle(double min, double max)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.RoofAngle >= min && h.RoofAngle <= max)
+                .ToList();
+        }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByPrice(double min, double max)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.Price >= min && h.Price <= max)
+                .ToList();
+        }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByNumberOfRooms(int min, int max)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.NumberOfRooms >= min && h.NumberOfRooms <= max)
+                .ToList();
+        }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByNumberOfBathrooms(int min, int max)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.NumberOfBathrooms >= min && h.NumberOfBathrooms <= max)
+                .ToList();
+        }
+
+        public IEnumerable<HouseDesign> GetHouseDesignsByNumberOfGaragePositions(int min, int max)
+        {
+            return _context.HouseDesigns
+                .Where(h => h.NumberOfGaragePositions >= min && h.NumberOfGaragePositions <= max)
+                .ToList();
+        }
+
 
         public IEnumerable<Category> GetAllCategories()
         {
@@ -74,16 +114,22 @@ namespace HouseDesignsEcommerce.Data
                     .FirstOrDefault();
         }
 
+        public Category GetCategoryByName(string catName)
+        {
+            return _context.Categories
+                    .Where(c => c.CategoryName == catName)
+                    .FirstOrDefault();
+        }
+
         public void AddEntity(object model)
         {
             _context.Add(model);
         }
 
-        public HouseDesign GetHouseDesignById(int id)
+        public bool SaveAll()
         {
-            return _context.HouseDesigns
-                    .Where(h => h.HouseDesignId == id)
-                    .FirstOrDefault();
+            return _context.SaveChanges() > 0;
         }
+
     }
 }
