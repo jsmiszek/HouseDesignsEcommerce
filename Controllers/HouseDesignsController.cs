@@ -75,7 +75,8 @@ namespace HouseDesignsEcommerce.Controllers
                         Price = model.Price,
                         NumberOfRooms = model.NumberOfRooms,
                         NumberOfBathrooms = model.NumberOfBathrooms,
-                        NumberOfGaragePositions = model.NumberOfGaragePositions
+                        NumberOfGaragePositions = model.NumberOfGaragePositions,
+                        ImagePath = model.ImagePath
                     };
 
                     _repository.AddEntity(newHouseDesign);
@@ -93,7 +94,8 @@ namespace HouseDesignsEcommerce.Controllers
                             Price = newHouseDesign.Price,
                             NumberOfRooms = newHouseDesign.NumberOfRooms,
                             NumberOfBathrooms = newHouseDesign.NumberOfBathrooms,
-                            NumberOfGaragePositions = newHouseDesign.NumberOfGaragePositions
+                            NumberOfGaragePositions = newHouseDesign.NumberOfGaragePositions,
+                            ImagePath = model.ImagePath
                         };
 
                         return Created($"/api/housedesigns/{vm.HouseDesignId}", vm);
