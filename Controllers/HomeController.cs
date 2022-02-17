@@ -1,4 +1,5 @@
 ﻿using HouseDesignsEcommerce.Data;
+using HouseDesignsEcommerce.Data.Entities;
 using HouseDesignsEcommerce.Models;
 using HouseDesignsEcommerce.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -72,5 +73,11 @@ namespace HouseDesignsEcommerce.Controllers
 
             return View(results);
         }
+
+     /*   [HttpGet("productdetails")]
+        public IActionResult ProductDetails(HouseDesign houseDesign)
+        {
+            return View(houseDesign);
+        }*/
     }
 }

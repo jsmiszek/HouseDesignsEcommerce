@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HouseDesign>
+@{
+    ViewBag.Title = "EachProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+} 
+<script src = "~/Scripts/jquery-1.10.2.min.js" > </script>   
+<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" > </script>   
+<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" > </script>
+
+<h3> Product Specification </h3>   
+<div asp-controller = "Home" > 
+    @foreach (var x in Model)
+    {
+        <div class="panel panel-default"> 
+            <div class = "panel-heading" > @x.ProjectName </div>   
+            <div class = "panel-body" >
+                <div class = "col-sm-3 col-md-6" style = "color:blue" > 
+                    <img src = "~/Images/@x.ImagePath" width = "400" height = "400" /> 
+                </div>   
+                <div class="col-sm-9 col-md-6">
+                    <h3> <span id="projectinfo" style="color:black"> <b> Nazwa projektu: </b></span> </h3>
+                    <h6> <span id="projectinfo" style="color:black"> @x.ProjectName </span></h6>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Powierzchnia uzytkowa: </b></span> </h3>
+                    <h4> <span id="projectinfo" style="color:black"> @x.UseableArea </span></h4>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Minimalne wymiary dzialki: </b></span> </h3>
+                    <h6> <span id="projectinfo" style="color:black"> @x.MinPlotDimensionLength x @x.MinPlotDimensionWidth </span></h6>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Kat dachu: </b></span> </h3>
+                    <h4> <span id="projectinfo" style="color:black"> @x.RoofAngle </span></h4>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Cena </b></span> </h3>
+                    <h4> <span id="projectinfo" style="color:black"> @x.Price </span></h4>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Ilosc pokoi: </b></span> </h3>
+                    <h6> <span id="projectinfo" style="color:black"> @x.NumberOfRooms</span></h6>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Ilosc lazienek: </b></span> </h3>
+                    <h6> <span id="projectinfo" style="color:black"> @x.NumberOfBathrooms </span></h6>
+                    <h3> <span id="projectinfo" style="color:black"> <b> Ilosc stanowisk garazowych: </b></span> </h3>
+                    <h6> <span id="projectinfo" style="color:black"> @x.NumberOfGaragePositions </span></h6>
+                </div>   
+            </div>
+            <div> 
+                <a id = "btn_add" @*href = "@Url.Action("Add ", "AddToCart ",x)"*@ class = "btn btn-info btn-lg" style = "margin-left:60px" > 
+                    <span class = "glyphicon glyphicon-shopping-cart" > </span> Add To Cart </a>   
+                <a id = "btn_add"@* href = "@Url.Action("Index ", "Home ")" *@ class = "btn btn-info btn-lg" style = "margin-left:60px" > 
+                    <span class = "glyphicon glyphicon-eye-open" > </span> Continue shopping   
+                </a>
+                <br/> 
+            </div>
+        </div>
+     } 
+</div>
