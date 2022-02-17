@@ -1,4 +1,5 @@
 ﻿using HouseDesignsEcommerce.Data;
+using HouseDesignsEcommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -52,6 +53,42 @@ namespace HouseDesignsEcommerce.Controllers
                 return BadRequest("Failed to get category by id");
             }
         }
+
+       /* [HttpPost]
+        public IActionResult Post([FromBody]CategoryViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var newHouseDesign = new HouseDesign()
+                    {
+                        
+                    };
+
+                    _repository.AddEntity(newHouseDesign);
+
+                    if (_repository.SaveAll())
+                    {
+                        var vm = new HouseDesignViewModel()
+                        {
+                            
+                        };
+
+                        return Created($"/api/categories/{vm.HouseDesignId}", vm);
+                    }
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to post category: {ex}");
+                return BadRequest("Failed to post category");
+            }
+        }*/
 
     }
 }

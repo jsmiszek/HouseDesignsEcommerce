@@ -22,7 +22,7 @@ namespace HouseDesignsEcommerce.Data
             _logger.LogInformation("Get AllHouseDesigns was called");
 
             return _context.HouseDesigns
-                    .OrderBy(h => h.ProjectName)
+                    .OrderBy(h => h.HouseDesignId)
                     .ToList();
 
             /*try
