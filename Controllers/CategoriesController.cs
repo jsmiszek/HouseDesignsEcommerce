@@ -61,7 +61,7 @@ namespace HouseDesignsEcommerce.Controllers
             }
         }
 
-        [HttpGet("{name:string}")]
+        [HttpGet("{name}")]
         public IActionResult Get(string name)
         {
             try
