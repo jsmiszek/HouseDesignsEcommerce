@@ -7,8 +7,10 @@
     @foreach (var h in Model)
     {
         <div class="col-md-3">
-            <div class="border bg-light rounded p-1" >
-                <img src="~/Images/@(h.ImagePath).jpg" class="img-fluid"  />
+            <div class="border bg-light rounded p-1">
+                <a href="@Url.Action("ProductDetails", "Home", h)">
+                    <img src="~/Images/@(h.ImagePath).jpg" class="img-fluid" />
+                </a>
                 <h3>@h.ProjectName</h3>
                 <ul>
                     <li>Powierzchnia uzytkowa: @h.UseableArea</li>
@@ -17,6 +19,9 @@
                     <li>Cena: @h.Price zł</li>
                 </ul>
                 <button id="buyButton" class="btn btn-success">Kup</button>
+
+
+
             </div>
 
         </div>

@@ -74,10 +74,10 @@ namespace HouseDesignsEcommerce.Controllers
             return View(results);
         }
 
-     /*   [HttpGet("productdetails")]
-        public IActionResult ProductDetails(HouseDesign houseDesign)
+        [HttpGet("productdetails")]
+        public IActionResult ProductDetails(HouseDesignViewModel houseDesign)
         {
             return View(houseDesign);
-        }*/
+        }
     }
 }
